@@ -23,23 +23,23 @@ def timeit(func):
     :param func: decorator on a given function
     :return: wrapper_function decorator
     """
-    def wrapper_function(*args):
+    def wrapper_function(*args, **kwargs):
         start = datetime.now()
-        func(*args)
+        func(*args, **kwargs)
         end = datetime.now()
-        print(f" Run time of the function {func.__name__} with runtime: {end - start}.")
+        print(f" Run time of the function {func.__name__} on {args} and {kwargs} with runtime: {end - start}.")
     return wrapper_function
 
 
 @timeit
-def timer(func, *args):
+def timer(func, *args, **kwargs):
     """
         This function is a decorator to check runtime of a function.
         :param func: decorator on a given function
         :return: wrapper_function decorator
         """
 
-    func(*args)
+    func(*args, **kwargs)
 
 
 if __name__ == "__main__":
@@ -47,4 +47,5 @@ if __name__ == "__main__":
     timer(print, "Hello")
     timer(zip, [1, 2, 3], [4, 5, 6])
     timer("Hi {name}".format, name="Bug")
+
 
